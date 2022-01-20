@@ -50,6 +50,7 @@ const styles = theme => ({
         fontWeight: 600,
         cursor: 'default',
         border: '2px solid rgb(255, 200, 93)',
+        marginRight: '10px',
         [theme.breakpoints.up('md')]: {
             position:'absolute',
             right: '50px',

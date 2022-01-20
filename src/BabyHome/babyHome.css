@@ -23,6 +23,8 @@
     top: 0;
     left: 0;
     justify-content: space-around;
+    z-index: 100;
+    align-items: center;
 }
 
 #homeContainer {
@@ -51,12 +53,6 @@
     font-weight: 600;
     padding: 5px 0 5px 0 ;
     border-radius: 12px;
-}
-
-@media screen and (max-width: 800px) {
-    .button {
-        font-size: 15px;
-    }
 }
 
 .button.selected {
@@ -91,4 +87,19 @@
 
 .hidden {
     display: none;
+}
+
+.priceText {
+    color: rgb(244, 238, 255);
+    font-size: 16px;
+}
+
+@media screen and (max-width: 800px) {
+    .button {
+        font-size: 15px;
+    }
+
+    .priceText {
+        font-size: 14px;
+    }
 }

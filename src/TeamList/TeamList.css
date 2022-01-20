@@ -1,0 +1,88 @@
+.teamListTab {
+    background: rgb(29, 38, 51);
+    border: 1px solid rgb(52, 61, 79);
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+#teamListContainer {
+    width: 92%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.teamListDialogOutline {
+    background: rgb(29, 38, 51);
+    border: 1px solid rgb(52, 61, 79);
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 30vw;
+    min-width: 300px;
+    padding: 30px
+}
+
+.showOnMobile {
+    display: none;
+}
+
+.showOnPc {
+    
+}
+
+.teamInfoTop {
+    margin: 10px 0 20px 0;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.teamedBabyInfoWrapper {
+    width: 45%;
+    border-right: 1px solid rgb(255, 183, 81);
+    font-size: 16px;
+}
+
+.removeTeamButton {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 850px) {
+    .showOnMobile {
+        display: inherit;
+    }
+    
+    .showOnPc {
+        display: none;
+    }
+
+    .teamInfoTop {
+        font-size: 20px;
+        margin-bottom: 10px !important;
+    }
+
+    .teamListTab {
+        padding: 15px;
+    }
+
+    .teamedBabyInfoWrapper {
+        width: 100%;
+        border-right: 0px solid rgb(255, 183, 81);
+        font-size: 12px;
+    }
+
+    .removeTeamButton {
+        top: 15px;
+        right: 15px;
+    }
+
+  }

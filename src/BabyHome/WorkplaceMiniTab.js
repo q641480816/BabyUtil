@@ -64,7 +64,9 @@ function WorkplaceMiniTab(props) {
                 <span>Unclaimed MILK</span>
                 <span style={{ color: 'rgb(254, 153, 59)' }}>{props.babyInfo.totalRewords ? props.babyInfo.totalRewords.toFixed(2) : '0.00'}</span>
             </div>
-            <Button variant="text" style={props.isRunningHarvestAll ? { background: 'grey', color: 'white' } : { background: 'rgb(254, 153, 59)', color: 'white' }} disabled={props.isRunningHarvestAll} onClick={() => harvestAll()}>Harvest all</Button>
+            <div style={props.wpInfo !== undefined ? {} : { visibility: 'hidden' }} className='flex-column'>
+                <Button variant="text" style={props.isRunningHarvestAll ? { background: 'grey', color: 'white' } : { background: 'rgb(254, 153, 59)', color: 'white' }} disabled={props.isRunningHarvestAll} onClick={() => harvestAll()}>Harvest all</Button>
+            </div>
         </div>
     )
 }

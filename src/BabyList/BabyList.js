@@ -121,23 +121,24 @@ class BabyList extends Component {
         if (this.state.selectedBaby !== null) {
             let chara = Constants.Charactors[this.state.selectedBaby.address.toLowerCase()];
             return (
-                <div id={'babyInfoDialog'} className='flex-row centered' >
-                    <div style={{ padding: '30px', paddingRight: '20px' }}><img id={'dialogImg'} src={chara.listImgUrl} alt={this.state.selectedBaby.id} /></div>
+                <div id={'babyInfoDialog'} className='dialog' >
+                    <span style={{ color: 'rgb(255, 183, 81)', fontSize: '20px', fontWeight: '600', marginTop: '10px' }} className='showOnMobile'>{chara.name}</span>
+                    <div className='babyInfoDialogImgWrapper'><img id={'dialogImg'} src={chara.listImgUrl} alt={this.state.selectedBaby.id} /></div>
                     <div className='flex-column'>
-                        <div className='flex-row' style={{ color: 'rgb(255, 183, 81)', fontSize: '17px', fontWeight: '600', justifyContent: 'space-between', marginBottom: '25px' }}>
-                            <span style={{ paddingRight: '20px' }}>{chara.name}</span>
-                            <span style={{ paddingRight: '20px' }}>{'Lv.' + this.state.selectedBaby.level}</span>
-                            <span style={{ paddingRight: '20px' }}>{this.state.selectedBaby.totalScore}</span>
-                            <span style={{ paddingRight: '20px' }}>{chara.role}</span>
-                            <span style={{ paddingRight: '20px' }}>{chara.dpmType}</span>
-                            <span style={{ paddingRight: '20px' }}>{chara.rarityName}</span>
+                        <div className='flex-row' style={{ color: 'rgb(255, 183, 81)', fontSize: '15px', fontWeight: '600', justifyContent: 'space-between', marginBottom: '25px', marginLeft: '20px', marginRight: '20px'}}>
+                            <span style={{ textAlign: ' center' }} className='showOnPc'>{chara.name}</span>
+                            <span style={{  textAlign: ' center' }}>{'Lv.' + this.state.selectedBaby.level}</span>
+                            <span style={{ textAlign: ' center' }}>{this.state.selectedBaby.totalScore}</span>
+                            <span style={{ textAlign: ' center' }}>{chara.role}</span>
+                            <span style={{ textAlign: ' center' }}>{chara.dpmType}</span>
+                            <span style={{ textAlign: ' center' }}>{chara.rarityName}</span>
                         </div>
                         {
                             Constants.attributes.map(attr => {
                                 return (
                                     <div key={attr} className='prograssBarWraper'>
                                         <span style={attr === chara.attr1 || attr === chara.attr2 ? { color: 'rgb(255, 183, 81)', fontSize: '14px', width: ' 80px', fontWeight: '600' } : { color: 'white', fontSize: '14px', width: ' 80px', fontWeight: '600' }}>{attr}</span>
-                                        <div style={{ width: '300px' }}>
+                                        <div className='attrBarWrapper'>
                                             <BorderLinearProgress variant="determinate" value={this.state.selectedBaby.attr[Constants.attributes.indexOf(attr)]} />
                                         </div>
                                         <span style={{ color: 'rgb(255, 183, 81)', fontSize: '16px', fontWeight: 'bold', margin: '0 20px 0 20px' }}>{this.state.selectedBaby.attr[Constants.attributes.indexOf(attr)]}</span>
@@ -165,7 +166,7 @@ class BabyList extends Component {
             })
 
             return (
-                <div id={'babyInfoDialog'} className='flex-column' style={{ color: 'white', padding: '30px', fontWeight: 'bold', minWidth: '400px', width: '40vw', maxWidth: '500px' }}>
+                <div className='flex-column dialog' style={{ color: 'white', padding: '30px', fontWeight: 'bold', minWidth: '300px', width: '40vw', maxWidth: '500px' }}>
                     <div style={{ fontSize: '24px', marginBottom: '20px' }}>Team List</div>
                     {this.state.teams.map((t, ti) => {
                         if (t.babies.includes(this.state.babyTeamDialogConfig.id)) {
@@ -181,7 +182,7 @@ class BabyList extends Component {
 
                     })}
                     <div className='flex-row' style={{ marginTop: '20px' }}>
-                        <div style={{ width: '70%' }}>
+                        <div style={{ width: '100%' }}>
                             <FormControl fullWidth>
                                 <InputLabel>Avaliable Teams</InputLabel>
                                 <Select
@@ -245,38 +246,40 @@ class BabyList extends Component {
 
         return (
             <div id='babyListContainer'>
-                <div className={'flex-row'} style={{ color: 'white', fontSize: '22px', fontWeight: 'bold', marginBottom: '20px' }}>
-                    <span style={{ marginRight: '25px' }}>Working / Free baby: <span style={{ color: 'rgb(255, 183, 81)' }}>{Object.keys(this.props.babyInfo).length === 0 ? 0 : Object.values(this.props.babyInfo.workplaces).map(wp => wp.ids.length).reduce((a, b) => a + b, 0) - this.props.babyInfo.workplaces['Home'].ids.length + "/" + this.props.babyInfo.workplaces['Home'].ids.length}</span></span>
-                    <span style={{ marginRight: '25px' }}>Qualified rewards: <span style={{ color: 'rgb(255, 183, 81)' }}>{this.state.qulifiedreward.toFixed(2)}</span></span>
-                    <span style={{ marginRight: '25px' }}>Total rewards: <span style={{ color: 'rgb(255, 183, 81)' }}>{this.state.totalReward.toFixed(2)}</span></span>
+                <div id='babySubInfo'>
+                    <span style={{ marginRight: '25px', marginTop: '3px' }}>Working / Free baby: <span style={{ color: 'rgb(255, 183, 81)' }}>{Object.keys(this.props.babyInfo).length === 0 ? 0 : Object.values(this.props.babyInfo.workplaces).map(wp => wp.ids.length).reduce((a, b) => a + b, 0) - this.props.babyInfo.workplaces['Home'].ids.length + "/" + this.props.babyInfo.workplaces['Home'].ids.length}</span></span>
+                    <span style={{ marginRight: '25px', marginTop: '3px' }}>Qualified rewards: <span style={{ color: 'rgb(255, 183, 81)' }}>{this.state.qulifiedreward.toFixed(2)}</span></span>
+                    <span style={{ marginRight: '25px', marginTop: '3px' }}>Total rewards: <span style={{ color: 'rgb(255, 183, 81)' }}>{this.state.totalReward.toFixed(2)}</span></span>
                 </div>
                 <div id={'babyListWraper'}>
-                    <div className='flex-row centered' style={{ width: '100%', justifyContent: 'space-evenly', borderBottom: '1px solid grey' }}>
-                        <span className='singleInfoBoxTitle'>Name</span>
-                        <span className='singleInfoBoxTitle'>Level</span>
-                        <span className='singleInfoBoxTitle'>Total Score</span>
-                        <span className='singleInfoBoxTitle'>Advantage</span>
-                        <span className='singleInfoBoxTitle'>Sub</span>
-                        <span className='singleInfoBoxTitle'>Salary</span>
-                        <span className='singleInfoBoxTitle'>Teamed</span>
-                        <span className='singleInfoBoxTitle'></span>
+                    <div style={{ width: '100%', overflowX: 'auto' }}>
+                        <div className='flex-row centered' style={{ width: '100%', minWidth: '800px', justifyContent: 'space-evenly', borderBottom: '1px solid grey' }}>
+                            <span className='singleInfoBoxTitle'>Name</span>
+                            <span className='singleInfoBoxTitle'>Level</span>
+                            <span className='singleInfoBoxTitle'>Total Score</span>
+                            <span className='singleInfoBoxTitle'>Advantage</span>
+                            <span className='singleInfoBoxTitle'>Sub</span>
+                            <span className='singleInfoBoxTitle'>Salary</span>
+                            <span className='singleInfoBoxTitle'>Teamed</span>
+                            <span className='singleInfoBoxTitle'></span>
+                        </div>
+                        {
+                            this.state.babies.slice((this.state.currentPage - 1) * 10, this.state.babies.length <= this.state.currentPage * 10 ? this.state.babies.length : this.state.currentPage * 10).map((b, index) => {
+                                return (
+                                    <div key={b.id} className='flex-row centered' style={{ width: '100%', minWidth: '800px', justifyContent: 'space-evenly', marginTop: '10px' }}>
+                                        <span className='singleInfoBox' style={{ cursor: 'pointer' }} onClick={() => this.setState({ selectedBaby: b })}>{b.name}</span>
+                                        <span className='singleInfoBox'>{b.level}</span>
+                                        <span className='singleInfoBox'>{b.totalScore}</span>
+                                        <span className='singleInfoBox'>{b.advantage}</span>
+                                        <span className='singleInfoBox'>{b.sub}</span>
+                                        <span className='singleInfoBox'>{b.salary ? b.salary : '--'}</span>
+                                        <span className='singleInfoBox' style={allTeamedBabies.includes(b.id) ? { color: 'rgb(254, 153, 59)', cursor: 'pointer' } : { cursor: 'pointer' }} onClick={() => this.setState({ babyTeamDialogConfig: b })}>{allTeamedBabies.includes(b.id) ? 'Yes' : 'No'}</span>
+                                        {this.state.selectedWorkPlace === 'Home' ? <span className='singleInfoBox'></span> : <span className={this.state.quitJobButtonEnable[index % 10] ? 'singleInfoBox enabled' : 'singleInfoBox disabled'} onClick={() => this.withdrawBaby(b, index)} >Quit</span>}
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
-                    {
-                        this.state.babies.slice((this.state.currentPage - 1) * 10, this.state.babies.length <= this.state.currentPage * 10 ? this.state.babies.length : this.state.currentPage * 10).map((b, index) => {
-                            return (
-                                <div key={b.id} className='flex-row centered' style={{ width: '100%', justifyContent: 'space-evenly', marginTop: '10px' }}>
-                                    <span className='singleInfoBox' style={{ cursor: 'pointer' }} onClick={() => this.setState({ selectedBaby: b })}>{b.name}</span>
-                                    <span className='singleInfoBox'>{b.level}</span>
-                                    <span className='singleInfoBox'>{b.totalScore}</span>
-                                    <span className='singleInfoBox'>{b.advantage}</span>
-                                    <span className='singleInfoBox'>{b.sub}</span>
-                                    <span className='singleInfoBox'>{b.salary ? b.salary : '--'}</span>
-                                    <span className='singleInfoBox' style={allTeamedBabies.includes(b.id) ? { color: 'rgb(254, 153, 59)', cursor: 'pointer' } : { cursor: 'pointer' }} onClick={() => this.setState({ babyTeamDialogConfig: b })}>{allTeamedBabies.includes(b.id) ? 'Yes' : 'No'}</span>
-                                    {this.state.selectedWorkPlace === 'Home' ? <span className='singleInfoBox'></span> : <span className={this.state.quitJobButtonEnable[index % 10] ? 'singleInfoBox enabled' : 'singleInfoBox disabled'} onClick={() => this.withdrawBaby(b, index)} >Quit</span>}
-                                </div>
-                            )
-                        })
-                    }
                     <div className='flex-row centered' style={this.state.babies.length === 0 ? { display: 'none' } : { marginTop: '20px' }}>
                         <div onClick={() => this.setState({ currentPage: this.state.currentPage === 1 ? this.state.currentPage : this.state.currentPage - 1 })}>
                             <Arrow direction={'left'} disabled={this.state.currentPage === 1} />
@@ -286,38 +289,38 @@ class BabyList extends Component {
                             <Arrow direction={'right'} disabled={this.state.currentPage === this.state.maxPage} />
                         </div>
                     </div>
-                    <div>
-                        <Dialog
-                            open={this.state.selectedBaby !== null}
-                            onClose={() => this.setState({ selectedBaby: null })}
-                            aria-labelledby="babydetail"
-                            aria-describedby="babydetail"
-                            maxWidth={'xl'}
-                            PaperProps={{
-                                style: {
-                                    backgroundColor: 'transparent'
-                                }
-                            }}
-                        >
-                            {this.renderDialog()}
-                        </Dialog>
-                    </div>
-                    <div>
-                        <Dialog
-                            open={this.state.babyTeamDialogConfig !== null}
-                            onClose={() => this.setState({ babyTeamDialogConfig: null, babyTeamDialogSelectedTeam: 0 })}
-                            aria-labelledby="babyTeam"
-                            aria-describedby="babyTeam"
-                            maxWidth={'xl'}
-                            PaperProps={{
-                                style: {
-                                    backgroundColor: 'transparent'
-                                }
-                            }}
-                        >
-                            {this.renderBabyTeamDialog()}
-                        </Dialog>
-                    </div>
+                </div>
+                <div>
+                    <Dialog
+                        open={this.state.selectedBaby !== null}
+                        onClose={() => this.setState({ selectedBaby: null })}
+                        aria-labelledby="babydetail"
+                        aria-describedby="babydetail"
+                        maxWidth={'xl'}
+                        PaperProps={{
+                            style: {
+                                backgroundColor: 'transparent'
+                            }
+                        }}
+                    >
+                        {this.renderDialog()}
+                    </Dialog>
+                </div>
+                <div>
+                    <Dialog
+                        open={this.state.babyTeamDialogConfig !== null}
+                        onClose={() => this.setState({ babyTeamDialogConfig: null, babyTeamDialogSelectedTeam: 0 })}
+                        aria-labelledby="babyTeam"
+                        aria-describedby="babyTeam"
+                        maxWidth={'xl'}
+                        PaperProps={{
+                            style: {
+                                backgroundColor: 'transparent'
+                            }
+                        }}
+                    >
+                        {this.renderBabyTeamDialog()}
+                    </Dialog>
                 </div>
             </div>
         )
