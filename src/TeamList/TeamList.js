@@ -192,7 +192,7 @@ class TeamList extends Component {
                                         <div className='flex-row showOnPc' style={{ width: 'calc(43%  - 100px)', height: '100%' }}>
                                             <div className='flex-column' style={{ width: '40%', alignItems: ' center' }}>
                                                 <span>PVE Chances</span>
-                                                <span style={{ color: 'rgb(255, 183, 81)', fontSize: '64px', lineHeight: '1' }}>{baby.pve ? baby.pve : '-'}</span>
+                                                <span style={{ color: 'rgb(255, 183, 81)', fontSize: '64px', lineHeight: '1' }}>{baby.pve === undefined || baby.pve === null ?  '-' : baby.pve}</span>
                                             </div>
                                             <div className='flex-column' style={{ width: '60%', alignItems: ' center', justifyContent: 'space-around' }}>
                                                 <Button variant="text" style={{ background: 'rgb(254, 153, 59)', color: 'white', borderRadius: '10px', fontWeight: 'bold', width: '70%', height: '32px' }} onClick={() => this.removeTeamBaby(i, bi)}>Remove</Button>
@@ -207,7 +207,7 @@ class TeamList extends Component {
                                     </div>
                                     <div className='flex-row showOnMobile' style={bi === 2 ? { width: '100%', paddingBottom: '15px', marginTop: '-12px', zIndex: '10' } : { width: '100%', paddingBottom: '15px', marginTop: '-12px', zIndex: '10', borderBottom: '1px solid rgb(52, 61, 79)' }}>
                                         <div className='flex-column centered' style={{ width: '100px', alignItems: 'center' }}>
-                                            <span style={{ color: 'rgb(255, 183, 81)', fontSize: '18px', lineHeight: '1', fontWeight: '500' }}>{'PVE ' + (baby.pve ? "x" + baby.pve : '-')}</span>
+                                            <span style={{ color: 'rgb(255, 183, 81)', fontSize: '18px', lineHeight: '1', fontWeight: '500' }}>{'PVE ' + (baby.pve === undefined || baby.pve === null ?  '-' : 'x' + baby.pve)}</span>
                                         </div>
                                         <div className='flex-row centered' style={{ width: 'calc(100% - 100px)', justifyContent: 'space-around' }}>
                                             <Button variant="text" style={{ background: 'rgb(254, 153, 59)', color: 'white', borderRadius: '10px', fontWeight: 'bold', width: '100px', height: '32px', fontSize: '12px' }} onClick={() => this.removeTeamBaby(i, bi)}>Remove</Button>

@@ -97,7 +97,6 @@ const fetchAllData = async (address) => {
         })
 
         let res2 = await multicall.call(context);
-
         Object.keys(res2.results).forEach(k => {
             const b = res2.results[k].callsReturnContext[0].returnValues;
             result.babies[k] = {
@@ -111,17 +110,18 @@ const fetchAllData = async (address) => {
         })
 
         //get pve chances
-        // let pveRes = await fetch('https://data.thecryptoyou.io/battle/getCount', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ tokenIds: Object.keys(result.babies) })
-        // });
-
-
-                    // Object.keys(res.data).forEach(id => result.babies[id].pve = res.data[id]);
-
+        context = Object.keys(result.babies).map(id => {
+            return {
+                reference: id,
+                contractAddress: Constants.Contracts.pveCounter,
+                abi: Constants.ABIs.pveCounterAbi,
+                calls: [{ reference: id, methodName: 'remainingNum', methodParameters: [id, result.babies[id].level] }]
+            }
+        });
+        let res4 = await multicall.call(context);
+        Object.keys(res4.results).forEach(k => {
+            result.babies[k].pve = res4.results[k].callsReturnContext[0].returnValues[0];
+        });
 
         //get working salary;
         context = [];
