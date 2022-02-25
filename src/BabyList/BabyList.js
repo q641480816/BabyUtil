@@ -120,6 +120,7 @@ class BabyList extends Component {
     renderDialog = () => {
         if (this.state.selectedBaby !== null) {
             let chara = Constants.Charactors[this.state.selectedBaby.address.toLowerCase()];
+            console.log(this.state.selectedBaby);
             return (
                 <div id={'babyInfoDialog'} className='dialog' >
                     <span style={{ color: 'rgb(255, 183, 81)', fontSize: '20px', fontWeight: '600', marginTop: '10px' }} className='showOnMobile'>{chara.name}</span>

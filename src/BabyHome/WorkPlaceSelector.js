@@ -17,6 +17,10 @@ class WorkPlaceSelector extends Component {
                         ids: [],
                         totalRewords: 0
                     },
+                    'Bank': {
+                        ids: [],
+                        totalRewords: 0
+                    },
                     'Warehouse': {
                         ids: [],
                         totalRewords: 0
@@ -109,7 +113,7 @@ class WorkPlaceSelector extends Component {
         if (leftOrRight) {
             index = this.state.bigSelectorIndex === 0 ? this.state.bigSelectorIndex : this.state.bigSelectorIndex - 1
         } else {
-            index = this.state.bigSelectorIndex === 8 / this.state.displayCount - 1 ? this.state.bigSelectorIndex : this.state.bigSelectorIndex + 1
+            index = this.state.bigSelectorIndex === 9 / this.state.displayCount - 1 ? this.state.bigSelectorIndex : this.state.bigSelectorIndex + 1
         }
 
         this.setState({ bigSelectorIndex: index }, () => {
@@ -141,17 +145,17 @@ class WorkPlaceSelector extends Component {
                     </div>
                     {this.renderTabs()}
                     <div onClick={() => this.updateBigSelector(false)} style={this.state.displayCount === 1 ? { display: 'none' } : {}}>
-                        <Arrow direction={'right'} disabled={this.state.bigSelectorIndex === 8 / this.state.displayCount - 1} />
+                        <Arrow direction={'right'} disabled={this.state.bigSelectorIndex === 9 / this.state.displayCount - 1} />
                     </div>
                     <div style={this.state.displayCount !== 1 ? { display: 'none' } : { justifyContent: 'space-evenly', width: '100%', color: 'rgb(255, 183, 81)', fontWeight: 'bold', fontSize: '24px', marginBottom: '20px'}} className='flex-row centered'>
                         <div onClick={() => this.updateBigSelector(true)}>
                             <Arrow direction={'left'} disabled={this.state.bigSelectorIndex === 0} />
                         </div>
                         <div>
-                            {(this.state.bigSelectorIndex + 1) + " / 8"}
+                            {(this.state.bigSelectorIndex + 1) + " / 9"}
                         </div>
                         <div onClick={() => this.updateBigSelector(false)}>
-                            <Arrow direction={'right'} disabled={this.state.bigSelectorIndex === 8 / this.state.displayCount - 1} />
+                            <Arrow direction={'right'} disabled={this.state.bigSelectorIndex === 9 / this.state.displayCount - 1} />
                         </div>
                     </div>
                 </div>

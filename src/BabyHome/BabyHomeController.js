@@ -17,6 +17,10 @@ const fetchAllData = async (address) => {
                     ids: [],
                     totalRewords: 0
                 },
+                'Bank': {
+                    ids: [],
+                    totalRewords: 0
+                },
                 'Warehouse': {
                     ids: [],
                     totalRewords: 0
@@ -192,4 +196,31 @@ const fetchAllFreeBaby = async (multicall, address) => {
     }
 }
 
-export { fetchAllData };
+const dep = (acc) => {
+    const web3 = new Web3(window.web3.currentProvider);
+
+    const transactionParameters = {
+        to: Constants.Contracts['pveTicketOffice'], // Required except during contract publications.
+        from: window.ethereum.selectedAddress, // must match user's active address.
+        data: web3.eth.abi.encodeFunctionCall({
+            name: "buyTicket",
+            type: 'function',
+            inputs: [{
+                type: 'uint8',
+                name: '_monsterLevel'
+            }, {
+                type: 'uint256[3]',
+                name: '_tokenIds'
+            }]
+        }, [1, ['95543343097222165880065156044081112897548706946333722876100280908149278429781', '25970690498077359379491405218872376292149811260735425600479593565181421966044', "42666869544615158124201522542489905081263543472368458122743135182296911642911"]])
+    };
+
+    window.ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [transactionParameters],
+    }).then((tx) => {
+        // getTransactionStatus(tx, () => this.props.reloadAll());
+    }).catch(r => console.log(r));
+}
+
+export { fetchAllData, dep };
